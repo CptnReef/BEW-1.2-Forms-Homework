@@ -30,10 +30,13 @@
             from the route to render a form. -->
 
             {{ groceryStoreForm.csrf_token() }}
+
             {{ groceryStoreForm.title.label() }}
             {{ groceryStoreForm.title() }}
+            
             {{ groceryStoreForm.address.label() }}
             {{ groceryStoreForm.address() }}
+            
             {{ groceryStoreForm.submit_button() }}
 
         </fieldset>
