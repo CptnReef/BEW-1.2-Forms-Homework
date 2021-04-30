@@ -18,6 +18,8 @@ class GroceryStore(db.Model):
     title = db.Column(db.String(80), nullable=False)
     address = db.Column(db.String(200), nullable=False)
     items = db.relationship('GroceryItem', back_populates='store')
+    created_by_id = db.Column(db.Integer, db.ForeignKey('user.id'))
+    created_by = db.relationship('User')
     
 class GroceryItem(db.Model):
     """Grocery Item model."""
