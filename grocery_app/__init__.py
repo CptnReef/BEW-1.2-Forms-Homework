@@ -14,16 +14,22 @@ db = SQLAlchemy(app)
 bcrypt = Bcrypt(app)
 
 from grocery_app.routes import main
+from grocery_app.routes import auth
 
 app.register_blueprint(main)
+app.register_blueprint(auth)
 
 login_manager = LoginManager()
 login_manager.init_app(app)
 login_manager.login_view = "auth.login"
 
+from grocery_app.models import User
+
 @login_manager.user_loader
 def load_user(id):
-    pass
+    return db.session.query(User).get(id)
 
 with app.app_context():
     db.create_all()
+    db.session.commit()
+
