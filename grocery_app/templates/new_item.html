@@ -3,7 +3,7 @@
 
 <h1>New Item</h1>
 
-<form>
+<form method="POST">
     <fieldset>
         <legend>Please enter your information:</legend>
 
@@ -12,7 +12,7 @@
         <!-- TODO: Remove the next paragraph and use the `form` object passed in 
             from the route to render a form. -->
 
-            {{ groceryItemForm.csrf_token }}
+            {{ groceryItemForm.csrf_token() }}
             
             {{ groceryItemForm.name.label() }}
             {{ groceryItemForm.name() }}

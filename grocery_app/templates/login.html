@@ -5,23 +5,23 @@
 <h1>Log In</h1>
 
 <form action="/login" method="POST">
-    {{ form.csrf_token }}
+    {{ form.csrf_token() }}
     <fieldset>
         <legend>Enter your credentials</legend>
 
-        {{ form.username.label }}
-        {{ form.username }}
+        {{ form.username.label() }}
+        {{ form.username() }}
         <ul>
         {% for error in form.username.errors %}
-            <li class="error">{{ error }}</li>
+            <li class="error">{{ error() }}</li>
         {% endfor %}
         </ul>
 
-        {{ form.password.label }}
-        {{ form.password }}
+        {{ form.password.label() }}
+        {{ form.password() }}
         <ul>
         {% for error in form.password.errors %}
-            <li class="error">{{ error }}</li>
+            <li class="error">{{ error() }}</li>
         {% endfor %}
         </ul>
 

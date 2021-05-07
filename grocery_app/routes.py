@@ -44,7 +44,7 @@ def new_store():
         return redirect(url_for('main.store_detail', store_id=newGroceryStore.id))
 
     # TODO: Send the form to the template and use it to render the form fields
-    return render_template('new_store.html', groceryStoreForm=groceryStoreForm)
+    return render_template('new_store.html', groceryStoreForm=groceryStoreForm, current_user=current_user)
 
 @main.route('/new_item', methods=['GET', 'POST'])
 @login_required
@@ -57,7 +57,6 @@ def new_item():
     # - flash a success message, and
     # - redirect the user to the item detail page.
     if groceryItemForm.validate_on_submit():
-        print('Mission. Complete!')
         newGroceryItem = GroceryItem(
             name=groceryItemForm.name.data,
             price=groceryItemForm.price.data,
@@ -73,7 +72,7 @@ def new_item():
         return redirect(url_for('main.item_detail', item_id=newGroceryItem.id))
 
     # TODO: Send the form to the template and use it to render the form fields
-    return render_template('new_item.html', groceryItemForm=groceryItemForm)
+    return render_template('new_item.html', groceryItemForm=groceryItemForm, current_user=current_user)
 
 @main.route('/store/<store_id>', methods=['GET', 'POST'])
 @login_required
@@ -112,7 +111,7 @@ def item_detail(item_id):
     if groceryItemForm.validate_on_submit():
         item.name = groceryItemForm.name.data
         item.price = groceryItemForm.price.data
-        # item.category = groceryItemForm.category.data
+        item.category = groceryItemForm.category.data
         item.photo_url = groceryItemForm.photo_url.data
         item.store = groceryItemForm.store.data
         db.session.commit()
@@ -124,10 +123,10 @@ def item_detail(item_id):
     item = GroceryItem.query.get(item_id)
     return render_template('item_detail.html', item=item, groceryItemForm=groceryItemForm, current_user=current_user)
 
-@main.route('/shopping_list')
+@main.route('/shopping_list', methods=['GET'])
 @login_required
 def shopping_list():
-    return render_template('shopping_list.html', current_user=current_user)
+    return render_template('shopping_list.html')
 
 ######################################################################################################
 ######################################################################################################

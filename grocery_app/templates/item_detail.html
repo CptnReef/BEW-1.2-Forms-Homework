@@ -13,10 +13,13 @@
 
 <p><strong>Store:</strong> {{ item.store.title }}</p>
 
+<form action="{{ url_for('main.shopping_list', item_id=item.id)}}" method="POST">
+    <input type="submit" value="Add to Shopping List">
+</form>
 
 <h2>Edit Item</h2>
 
-<form>
+<form method="POST">
     <fieldset>
         <legend>Please enter your information:</legend>
 
@@ -24,23 +27,17 @@
         <!-- TODO: Remove the next paragraph and use the `form` object passed in 
             from the route to render a form. -->
 
-            {{ groceryItemForm.csrf_token }}
-
+            {{ groceryItemForm.csrf_token() }}
             {{ groceryItemForm.name.label() }}
-            {{ groceryItemForm.name() }}
-            
+            {{ groceryItemForm.name() }}            
             {{ groceryItemForm.price.label() }}
-            {{ groceryItemForm.price() }}
-            
+            {{ groceryItemForm.price() }}            
             {{ groceryItemForm.category.label() }}
             {{ groceryItemForm.category() }}
-            
             {{ groceryItemForm.photo_url.label() }}
             {{ groceryItemForm.photo_url() }}
-
             {{ groceryItemForm.store.label() }}
             {{ groceryItemForm.store() }}
-            
             {{ groceryItemForm.submit_button() }}
 
     </fieldset>
